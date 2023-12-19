@@ -10,7 +10,7 @@ def train_model(reg, X_train, y_train, T, score, hide_warnings=True):
     try:
         model = reg()
     except Exception as e:
-        if hide_warnings:
+        if not hide_warnings:
             print(f"ERROR with {reg} at construction time: {e}")
         return
 
@@ -21,7 +21,7 @@ def train_model(reg, X_train, y_train, T, score, hide_warnings=True):
             model.fit(X_train, y_train)
             training_time += 1
     except Exception as e:
-        if hide_warnings:
+        if not hide_warnings:
             print(f"ERROR with {model.__class__.__name__} at training time: {e}")
         return
 
@@ -33,7 +33,7 @@ def train_model(reg, X_train, y_train, T, score, hide_warnings=True):
             inference_time += 1
     except Exception as e:
         score.append((model.__class__.__name__, training_time, "N/A"))
-        if hide_warnings:
+        if not hide_warnings:
             print(f"ERROR with {model.__class__.__name__} at inference time: {e}")
         return
 
