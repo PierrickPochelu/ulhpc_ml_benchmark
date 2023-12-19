@@ -6,7 +6,7 @@ from sklearn.base import RegressorMixin, ClassifierMixin
 import numpy as np
 
 
-def train_model(reg, X_train, y_train, T, score, hide_warnings):
+def train_model(reg, X_train, y_train, T, score, hide_warnings=True):
     try:
         model = reg()
     except Exception as e:
@@ -63,7 +63,7 @@ def bench(
 
     # Set the maximum allowed time for training in seconds
     for num_samples, model_constructor in model_constructors:
-        train_model(model_constructor, X_train, y_train, fix_comp_time, score)
+        train_model(model_constructor, X_train, y_train, fix_comp_time, score, hide_warning)
 
     score.sort(
         key=lambda x: x[1])  # x[0] -> sorting according algo name, x[1] according training time, x[2] inference time
