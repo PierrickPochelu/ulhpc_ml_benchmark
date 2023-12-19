@@ -62,5 +62,7 @@ DummyRegressor 13205 200102
 
 For each algorithm line, the benchmark output provides the following information:
 * Algorithm name
-* Number of time the algorithm ingest `num_samples` of data ingestion during training `fix_comp_time`
+* Number of time the algorithm ingest batch of `num_samples` during training `fix_comp_time`
 * Same for inference
+
+Notice: the line are sorted according the 1st column.
