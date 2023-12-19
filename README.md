@@ -3,55 +3,64 @@ Benchmark of many ML algorithms at once for easy platform evaluation.
 
 This repo aims evaluating +40 Machine Learning algorithms in training and inference modes. It makes easier the evaluation of platforms based on the performance of realistic algorithms instead of using FLOPS or other CPU characteristics. Algorithms have different complexity (in Big-O notation) and may require several order of magnitude of time. This is why we structure the benchmark to assess the number of data samples processed within a fixed amount of time, rather than measuring the computational time for a fixed quantity of data. The latter approach would be impractical due to the vast differences in processing times—ranging from milliseconds to hours—across various algorithms.
 
-code:
+Utilization example:
 ```python
-bench(num_samples=100, num_features=100, fix_comp_time=1)
+(base) pierrick@LinuxUniBXD7LS3:~/project/ulhpc_ml_benchmark$ python3
+Python 3.10.9 (main, Jan 11 2023, 15:21:40) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from bench import bench
+>>> bench(num_samples=100, num_features=10, fix_comp_time=1)
 ```
-For each algorithm, the benchmark output provides the following information:
+bench(num_samples=100, num_features=10, fix_comp_time=1) represents a benchmark on 100 data points, 10 features per point, and each algorithm is trained 1 second. 
 
-*    Algorithm name
-*    Rate of data ingestion during training (samples per fixed computation time)
-* Rate of data ingestion during inference
+After ~40 seconds the output is:
 
-output:
 ```
-LassoCV 6 39640
-ElasticNetCV 7 40089
-RandomForestRegressor 26 657
-ExtraTreesRegressor 47 759
-GradientBoostingRegressor 74 11731
-MLPRegressor 75 20647
-HistGradientBoostingRegressor 125 1634
-BaggingRegressor 185 1975
-HuberRegressor 257 39302
-QuantileRegressor 750 38637
-ARDRegression 1553 39902
-Lasso 1603 36295
-ElasticNet 1650 36593
-AdaBoostRegressor 1733 10175
-BayesianRidge 2058 37766
-PoissonRegressor 2234 36531
-TransformedTargetRegressor 2306 21393
-TweedieRegressor 2438 37803
-GaussianProcessRegressor 2464 20872
-GammaRegressor 2580 39750
-RidgeCV 2689 37955
-TheilSenRegressor 3588 40284
-PLSRegression 3893 31798
-Ridge 3945 38807
-SGDRegressor 4045 37852
-LassoLars 4134 39915
-OrthogonalMatchingPursuit 4188 38354
-Lars 4249 38947
-NuSVR 4795 24477
-SVR 5165 24685
-LinearRegression 5479 41247
-PassiveAggressiveRegressor 5488 38287
-KernelRidge 5787 9623
-LinearSVR 6077 41341
-ExtraTreeRegressor 7135 27034
-DecisionTreeRegressor 7145 26169
-RadiusNeighborsRegressor 9689 2168
-KNeighborsRegressor 9707 9249
-DummyRegressor 15243 234076
+>>> bench(100,10,1)
+TheilSenRegressor 10 34716
+ElasticNetCV 18 34552
+LassoCV 18 34426
+RandomForestRegressor 25 641
+ExtraTreesRegressor 39 462
+GradientBoostingRegressor 59 8848
+MLPRegressor 86 19242
+HistGradientBoostingRegressor 101 1297
+QuantileRegressor 142 34948
+BaggingRegressor 148 1665
+HuberRegressor 173 33674
+RANSACRegressor 918 23176
+AdaBoostRegressor 1393 8308
+GaussianProcessRegressor 1445 6168
+LassoLarsIC 1859 34741
+ARDRegression 1938 33936
+TransformedTargetRegressor 2003 17661
+Lasso 2041 31807
+ElasticNet 2071 31970
+RidgeCV 2391 35068
+TweedieRegressor 2409 34881
+GammaRegressor 2476 33955
+PoissonRegressor 2549 29877
+BayesianRidge 2600 33377
+PLSRegression 3407 28063
+NuSVR 3473 21918
+Ridge 3580 34927
+LassoLars 3619 34460
+SGDRegressor 3718 33920
+Lars 3723 34997
+OrthogonalMatchingPursuit 3887 35504
+KernelRidge 3921 6713
+SVR 4079 21216
+LinearRegression 4674 35220
+PassiveAggressiveRegressor 4792 34678
+LinearSVR 5054 35520
+RadiusNeighborsRegressor 5446 992
+KNeighborsRegressor 5537 4052
+ExtraTreeRegressor 6016 22086
+DecisionTreeRegressor 6310 22741
+DummyRegressor 13205 200102
 ```
+
+For each algorithm line, the benchmark output provides the following information:
+* Algorithm name
+* Number of time the algorithm ingest `num_samples` of data ingestion during training `fix_comp_time`
+* Same for inference
