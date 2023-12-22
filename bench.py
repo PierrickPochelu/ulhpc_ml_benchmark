@@ -72,4 +72,4 @@ def bench(
 
 
 if __name__ == "__main__":
-    bench(num_samples=100, num_features=100, fix_comp_time=1)
+    bench(num_samples=1000, num_features=100, fix_comp_time=60)
