@@ -115,6 +115,4 @@ For each algorithm line, the benchmark output provides the following information
 Notice: the line are sorted according the 1st column.
 
 
-Example of experiments on 4 CPUs:
 
-![Result](result.png)
