@@ -24,9 +24,10 @@ import numpy as np
 DISPLAY_WARNING = False
 THRESHOLD_DECIMAL = 10
 ROUNDING = 3
+CENTER_TABLE_DISPLAY = True
 
 
-def bench_func(func: Callable, T: int, *func_args):
+def _bench_func(func: Callable, T: int, *func_args):
     time_count = 0
     start_time = time.time()
     while start_time + T > time.time():
@@ -41,7 +42,7 @@ def bench_func(func: Callable, T: int, *func_args):
     return time_count
 
 
-def bench_model(model_constructor: callable, X: np.ndarray, y: np.ndarray, T: int, score: List[Tuple]) -> None:
+def _bench_model(model_constructor: callable, X: np.ndarray, y: np.ndarray, T: int, score: List[Tuple]) -> None:
     """
     Train and evaluate the performance of a machine learning model.
 
@@ -72,14 +73,14 @@ def bench_model(model_constructor: callable, X: np.ndarray, y: np.ndarray, T: in
         return
 
     try:
-        training_time = bench_func(model.fit, T, X, y)
+        training_time = _bench_func(model.fit, T, X, y)
     except Exception as e:
         if DISPLAY_WARNING:
             print(f"ERROR with {model_name} at training time: {e}")
         return
 
     try:
-        inference_time = bench_func(model.predict, T, X)
+        inference_time = _bench_func(model.predict, T, X)
     except Exception as e:
         if DISPLAY_WARNING:
             print(f"ERROR with {model_name} at inference time: {e}")
@@ -88,8 +89,41 @@ def bench_model(model_constructor: callable, X: np.ndarray, y: np.ndarray, T: in
     score.append((model_name, training_time, inference_time))
 
 
+def _display(score:List[Tuple])->None:
+    if len(score) < 1:
+        print("No score table to display")
+        return
+
+    if CENTER_TABLE_DISPLAY:
+        # compute the number of chars per column
+        number_of_chars_per_column = [0] * len(score[0])
+        for i, row in enumerate(score):
+            for j, val in enumerate(row):
+                nb_char_val = len(str(val))
+                number_of_chars_per_column[j] = max(nb_char_val, number_of_chars_per_column[j])
+
+        # Compute each row
+        white_space_sep = 1
+        rows = []
+        for i, row in enumerate(score):
+            row_text = ""
+            for j, val in enumerate(row):
+                val_str = str(val)
+                nb_white_space = ((number_of_chars_per_column[j] - len(val_str)) + white_space_sep)
+                row_text += val_str
+                row_text += " " * nb_white_space
+            rows.append(row_text)
+
+        # Print the rows
+        for r in rows:
+            print(r)
+    else:
+        for s in score:
+            print(' '.join(map(str, s)))
+
+
 def bench(num_samples: int, num_features: int, fix_comp_time: float, reg_or_cls: str = "cls",
-          nb_cls_output: int = 2, nb_reg_output: int = 1, sorting_mode=1) -> None:
+          nb_cls_output: int = 2, nb_reg_output: int = 1, sorting_mode=1) -> List[Tuple]:
     """
     Benchmark the training and inference times of scikit-learn models.
 
@@ -137,12 +171,13 @@ def bench(num_samples: int, num_features: int, fix_comp_time: float, reg_or_cls:
         y_train = np.random.randint(low=0, high=nb_cls_output, size=(len(X_train),))  # sparse representation
 
     for num_samples, model_constructor in model_constructors:
-        bench_model(model_constructor, X_train, y_train, fix_comp_time, score)
+        _bench_model(model_constructor, X_train, y_train, fix_comp_time, score)
 
     score.sort(key=lambda x: x[sorting_mode])
-    for s in score:
-        print(' '.join(map(str, s)))
+
+    _display(score)
+    return score
 
 
 if __name__ == "__main__":
-    bench(num_samples=1000, num_features=100, fix_comp_time=1, reg_or_cls="cls")
+    bench(num_samples=100, num_features=10, fix_comp_time=1, reg_or_cls="cls")

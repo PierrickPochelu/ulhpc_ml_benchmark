@@ -16,51 +16,51 @@ bench(num_samples=100, num_features=10, fix_comp_time=1) represents a benchmark 
 After ~50 seconds the output is:
 
 ```
-LassoCV 0.234817 16749
-ElasticNetCV 0.33169 11628
-TheilSenRegressor 1.527735 18588
-MultiTaskElasticNetCV 6.302748 17154
-MultiTaskLassoCV 6.324106 17001
-QuantileRegressor 6.912841 18286
-GaussianProcessRegressor 19 24
-RandomForestRegressor 25 535
-MLPRegressor 26 4021
-ExtraTreesRegressor 39 598
-GradientBoostingRegressor 56 4370
-MultiTaskLasso 60 15964
-MultiTaskElasticNet 61 17405
-HistGradientBoostingRegressor 65 1073
-HuberRegressor 80 17127
-BaggingRegressor 148 723
-NuSVR 148 14297
-ElasticNet 170 11316
-KernelRidge 181 866
-Lasso 219 16441
-RidgeCV 377 20126
-ARDRegression 416 18103
-BayesianRidge 436 17228
-RANSACRegressor 565 14170
-SGDRegressor 768 11772
-LassoLarsIC 782 17114
-AdaBoostRegressor 1033 5163
-PassiveAggressiveRegressor 1277 18707
-TweedieRegressor 1304 11981
-TransformedTargetRegressor 1312 7764
-PLSRegression 1522 4397
-OrthogonalMatchingPursuit 1549 17003
-LassoLars 1592 16402
-Ridge 1621 19856
-Lars 1673 17026
-GammaRegressor 1812 16029
-PoissonRegressor 1915 17134
-LinearSVR 1916 18146
-SVR 2147 13748
-LinearRegression 2219 17062
-ExtraTreeRegressor 4364 11644
-DecisionTreeRegressor 4687 12640
-KNeighborsRegressor 7255 280
-RadiusNeighborsRegressor 7347 63
-DummyRegressor 13247 185039
+ElasticNetCV                  0.202  17985  
+LassoCV                       0.211  17338  
+TheilSenRegressor             1.651  16240  
+MultiTaskLassoCV              5.284  17517  
+MultiTaskElasticNetCV         6.001  16638  
+QuantileRegressor             10.691 11873  
+MLPRegressor                  14     2957   
+GaussianProcessRegressor      21     26     
+RandomForestRegressor         23     541    
+ExtraTreesRegressor           42     614    
+GradientBoostingRegressor     61     4987   
+HistGradientBoostingRegressor 64     1119   
+MultiTaskElasticNet           67     16727  
+MultiTaskLasso                70     15296  
+HuberRegressor                85     18049  
+NuSVR                         146    13873  
+BaggingRegressor              153    743    
+KernelRidge                   174    869    
+ElasticNet                    205    17569  
+Lasso                         219    15988  
+RidgeCV                       265    11561  
+ARDRegression                 332    11616  
+BayesianRidge                 370    15134  
+RANSACRegressor               424    9158   
+SGDRegressor                  684    11609  
+LassoLarsIC                   843    16636  
+Ridge                         1012   11731  
+AdaBoostRegressor             1074   5504   
+PassiveAggressiveRegressor    1255   11666  
+TransformedTargetRegressor    1299   10994  
+PoissonRegressor              1372   10837  
+Lars                          1631   18324  
+LassoLars                     1652   17542  
+OrthogonalMatchingPursuit     1657   16939  
+PLSRegression                 1725   4588   
+TweedieRegressor              1856   16051  
+LinearSVR                     1911   11702  
+GammaRegressor                2041   17493  
+SVR                           2165   13647  
+LinearRegression              2175   16603  
+ExtraTreeRegressor            4934   12517  
+DecisionTreeRegressor         5088   12511  
+RadiusNeighborsRegressor      6877   63     
+KNeighborsRegressor           7749   288    
+DummyRegressor                13801  192216
 ```
 
 Now let's benchmark classifiers
@@ -69,41 +69,41 @@ Now let's benchmark classifiers
 >>> bench(num_samples=1000, num_features=100, fix_comp_time=1, reg_or_cls="cls")
 ```
 
-returns
+displays:
 
 ```
-GaussianProcessClassifier 12 29
-RandomForestClassifier 17 323
-ExtraTreesClassifier 23 338
-AdaBoostClassifier 24 158
-GradientBoostingClassifier 32 4082
-MLPClassifier 38 3886
-SVC 40 24
-LogisticRegressionCV 44 15586
-HistGradientBoostingClassifier 71 1216
-LabelSpreading 109 164
-BaggingClassifier 123 715
-CalibratedClassifierCV 124 642
-LabelPropagation 141 165
-CategoricalNB 208 976
-RidgeClassifierCV 285 14668
-QuadraticDiscriminantAnalysis 437 1805
-SGDClassifier 448 15471
-Perceptron 701 16004
-RidgeClassifier 742 14513
-LinearSVC 804 16303
-BernoulliNB 858 2100
-ComplementNB 1073 10361
-PassiveAggressiveClassifier 1155 15967
-LogisticRegression 1167 15897
-MultinomialNB 1655 13369
-GaussianNB 1887 3059
-DecisionTreeClassifier 2519 11871
-ExtraTreeClassifier 2751 11878
-NearestCentroid 3846 3399
-RadiusNeighborsClassifier 5069 96
-KNeighborsClassifier 5436 548
-DummyClassifier 15287 121029
+GaussianProcessClassifier      0.103 24     
+RandomForestClassifier         16    296    
+AdaBoostClassifier             20    129    
+ExtraTreesClassifier           22    301    
+GradientBoostingClassifier     26    3466   
+MLPClassifier                  33    3466   
+SVC                            35    22     
+LogisticRegressionCV           40    11889  
+HistGradientBoostingClassifier 48    912    
+LabelSpreading                 96    148    
+BaggingClassifier              108   536    
+CalibratedClassifierCV         112   617    
+LabelPropagation               127   147    
+CategoricalNB                  177   867    
+RidgeClassifierCV              270   12418  
+Perceptron                     397   13088  
+QuadraticDiscriminantAnalysis  422   1548   
+SGDClassifier                  440   12716  
+RidgeClassifier                688   12465  
+LinearSVC                      759   12484  
+LogisticRegression             1031  12911  
+PassiveAggressiveClassifier    1072  12447  
+BernoulliNB                    1137  2816   
+ComplementNB                   1280  11883  
+MultinomialNB                  1498  11434  
+GaussianNB                     1649  2609   
+DecisionTreeClassifier         2357  10175  
+ExtraTreeClassifier            2407  10034  
+NearestCentroid                3245  2938   
+RadiusNeighborsClassifier      4481  93     
+KNeighborsClassifier           4584  296    
+DummyClassifier                13901 107307 
 ```
 
 
