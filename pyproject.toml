@@ -3,7 +3,7 @@ requires = ["setuptools", "numpy", "scikit-learn"]
 
 [project]
 name = "ulhpc_ml_benchmark"
-version = "0.0.1"
+version = "0.0.3"
 authors = [
   { name="Pierrick Pochelu", email="pierrick.pochelu@gmail.com" },
 ]
