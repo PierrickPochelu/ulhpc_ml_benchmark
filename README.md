@@ -2,7 +2,13 @@
 Benchmark of many ML algorithms at once for easy platform evaluation.
 
 This repo aims evaluating +40 Machine Learning algorithms in training and inference modes. It makes easier the evaluation of platforms based on the performance of realistic algorithms instead of using FLOPS or other CPU characteristics. Algorithms have different complexity (in Big-O notation) and may require several order of magnitude of time. This is why we structure the benchmark to assess the number of data samples processed within a fixed amount of time, rather than measuring the computational time for a fixed quantity of data. The latter approach would be impractical due to the vast differences in processing times—ranging from milliseconds to hours—across various algorithms.
+## Installation
+```python
+pip install ulhpc_ml_benchmark
+```
+The only dependency is scikit-learn
 
+## API
 Utilization example:
 ```python
 (base) pierrick@LinuxUniBXD7LS3:~/project/ulhpc_ml_benchmark$ python3
