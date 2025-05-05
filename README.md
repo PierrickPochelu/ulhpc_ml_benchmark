@@ -1,3 +1,6 @@
+> ⚠️ **Warning: This repository is obsolete.**  
+> Development has moved to a new location. Please visit the updated repository here: (https://github.com/PierrickPochelu/scikit-learn-bench)](https://github.com/PierrickPochelu/scikit-learn-bench))
+
 # ulhpc_ml_benchmark
 Benchmark of many ML algorithms at once for easy platform evaluation.
 
